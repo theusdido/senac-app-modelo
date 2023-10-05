@@ -15,6 +15,15 @@ const routes: Routes = [
     path: 'usuario-form',
     loadChildren: () => import('./usuario/usuario-form/usuario-form.module').then( m => m.UsuarioFormPageModule)
   },
+  {
+    path: 'usuario-form/:id',
+    loadChildren: () => import('./usuario/usuario-form/usuario-form.module').then( m => m.UsuarioFormPageModule)
+  },  
+  {
+    path: 'usuario-listar',
+    loadChildren: () => import('./usuario/usuario-listar/usuario-listar.module').then( m => m.UsuarioListarPageModule)
+  },
+
 ];
 
 @NgModule({
