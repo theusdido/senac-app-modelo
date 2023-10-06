@@ -20,7 +20,7 @@ export class RequisicaoService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin' : '*'
-      })      
+      })
     };
     return this.http.post('/requisicao',formData,httpOptions);
   }

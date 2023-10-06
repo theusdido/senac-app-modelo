@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RequisicaoService } from '../../service/requisicao.service';
 import { Router } from '@angular/router';
-import { RequisicaoService } from 'src/app/service/requisicao.service';
 
 @Component({
   selector: 'app-usuario-listar',
@@ -22,7 +22,8 @@ export class UsuarioListarPage implements OnInit {
   listar(){
     this.requisicao_service.get({
       controller:'usuario-listar'
-    }).subscribe(
+    })
+    .subscribe(
       (_res:any) => {
         this.usuarios = _res;
       }
@@ -38,10 +39,9 @@ export class UsuarioListarPage implements OnInit {
       controller:'usuario-excluir',
       id:id
     })
-    .subscribe(
-      () => {
-       this.listar() 
-      }
-    );
+    .subscribe( () => {
+      this.listar();
+    } );
   }
+  
 }

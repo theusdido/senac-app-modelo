@@ -18,21 +18,20 @@ export class UsuarioFormPage implements OnInit {
   constructor(
     public requisicao_service:RequisicaoService,
     private loadingController: LoadingController,
-    private activate_route:ActivatedRoute
+    private activated_router:ActivatedRoute
   ) {
-
-    this.activate_route.params
+    this.activated_router.params
     .subscribe(
       (params:any) => {
+        this.id = params.id == undefined ? 0 : params.id; 
         this.requisicao_service.get({
           controller:'usuario-get',
-          id:params.id
+          id:this.id
         })
         .subscribe(
-          (_res:any) => {
-            this.id     = _res.id;
-            this.nome   = _res.nome;
-            this.login  = _res.login;
+          (_dados:any) => {
+            this.nome   = _dados.nome;
+            this.login  = _dados.login;
           }
         );
       }
@@ -40,7 +39,6 @@ export class UsuarioFormPage implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   async salvar(){
