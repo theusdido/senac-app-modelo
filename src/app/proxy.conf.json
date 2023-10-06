@@ -1,6 +1,6 @@
 {
     "/requisicao/*":{
-      "target": "http://localhost/miles/index.php",
+      "target": "http://localhost/senac/miles/index.php",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug"

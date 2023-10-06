@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequisicaoService } from 'src/app/service/requisicao.service';
 import { LoadingController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-usuario-form',
@@ -9,14 +10,34 @@ import { LoadingController } from '@ionic/angular';
 })
 export class UsuarioFormPage implements OnInit {
 
-  public nome:string = '';
+  public id:number    = 0
+  public nome:string  = '';
   public login:string = '';
   public senha:string = '';
 
   constructor(
     public requisicao_service:RequisicaoService,
-    private loadingController: LoadingController
-  ) {}
+    private loadingController: LoadingController,
+    private activate_route:ActivatedRoute
+  ) {
+
+    this.activate_route.params
+    .subscribe(
+      (params:any) => {
+        this.requisicao_service.get({
+          controller:'usuario-get',
+          id:params.id
+        })
+        .subscribe(
+          (_res:any) => {
+            this.id     = _res.id;
+            this.nome   = _res.nome;
+            this.login  = _res.login;
+          }
+        );
+      }
+    );
+  }
 
   ngOnInit() {
 
@@ -32,6 +53,7 @@ export class UsuarioFormPage implements OnInit {
 
     const fd = new FormData();
     fd.append('controller','usuario');
+    fd.append('id',String(this.id));
     fd.append('nome',this.nome);
     fd.append('login',this.login);
     fd.append('senha',this.senha);
@@ -41,7 +63,7 @@ export class UsuarioFormPage implements OnInit {
     .subscribe(
       async () => {
         await loading.dismiss();
-      }      
+      }
     );
 
   }

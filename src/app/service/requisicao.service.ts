@@ -12,9 +12,7 @@ export class RequisicaoService {
 
   get(dados:any){
     return this.http.get('/requisicao',{
-      params:{
-        _dados:dados
-      }
+      params:dados
     });
   }
 
