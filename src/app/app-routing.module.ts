@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { GuardService } from './service/guard.service';
 
 const routes: Routes = [
   {
@@ -9,7 +10,7 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full'    
   },
   {
     path: 'usuario-form',
@@ -23,6 +24,13 @@ const routes: Routes = [
     path: 'usuario-listar',
     loadChildren: () => import('./usuario/usuario-listar/usuario-listar.module').then( m => m.UsuarioListarPageModule)
   },
+  {
+    path: 'autenticacao',
+    loadChildren: () => import('./autenticacao/autenticacao.module').then( m => m.AutenticacaoPageModule),
+    canActivateChild: [GuardService]
+  },
+
+
 ];
 
 @NgModule({

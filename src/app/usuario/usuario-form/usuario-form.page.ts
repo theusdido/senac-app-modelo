@@ -20,6 +20,11 @@ export class UsuarioFormPage implements OnInit {
     private loadingController: LoadingController,
     private activated_router:ActivatedRoute
   ) {
+
+    const rotaAtual = this.activated_router.snapshot.url.join('/');
+    console.log();
+    
+
     this.activated_router.params
     .subscribe(
       (params:any) => {
