@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class AutenticacaoService {
 
-  public is_logged!:Observable<boolean>;
   constructor(
     public requisicao_service:RequisicaoService
   ) { }
@@ -23,14 +22,10 @@ export class AutenticacaoService {
     .post(fd);
   }
 
-  validarToken(){
-    this.requisicao_service.get({
+  validarToken(_token:string){
+    return this.requisicao_service.get({
       controller:'validar-token',
-      token:sessionStorage.getItem('token')
-    }).subscribe(
-      () => {
-        this.is_logged.subscribe(()=>false);
-      }
-    );
+      token:_token
+    });
   }
 }
